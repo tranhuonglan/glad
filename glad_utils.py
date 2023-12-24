@@ -7,7 +7,7 @@ import os
 import torchvision
 import gc
 from tqdm import tqdm
-
+import torch.nn as nn
 from utils import get_network, config, evaluate_synset
 
 def build_dataset(ds, class_map, num_classes):
