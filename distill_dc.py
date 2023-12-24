@@ -62,7 +62,7 @@ def main(args):
     images_all, labels_all, indices_class = build_dataset(dst_train, class_map, num_classes)
 
     real_train_loader = torch.utils.data.DataLoader(dst_train, batch_size=args.batch_train, shuffle=True,
-                                                    num_workers=16)
+                                                    num_workers=2)
 
     def get_images(c, n):  # get random n images from class c
         idx_shuffle = np.random.permutation(indices_class[c])[:n]

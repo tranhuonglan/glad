@@ -282,7 +282,7 @@ def load_sgxl(res, args=None):
             key = "G"
     with dnnlib.util.open_url(network_pkl) as f:
         G = legacy.load_network_pkl(f)[key]
-        G = G.eval().requires_grad_(False).to(device)
+        # G = G.eval().requires_grad_(False).to(device)
 
     z_dim = G.z_dim
     w_dim = G.w_dim
@@ -331,6 +331,7 @@ def latent_to_im(G, latents, args=None):
             if args.layer is None or args.layer == -1:
                 im = G(latents[0], mode="wp")
             else:
+                
                 im = G(latents[0], latents[1], args.layer, mode="from_f")
 
             if args.distributed and False:

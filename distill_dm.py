@@ -30,6 +30,7 @@ def main(args):
     run = wandb.init(
         project="GLaD",
         job_type="DM",
+        api_key='cfeb192e9e37c78cab4d396f4465e0ea0a275561',
         config=args
     )
 
@@ -78,7 +79,6 @@ def main(args):
 
     criterion = nn.CrossEntropyLoss().to(args.device)
     print('%s training begins'%get_time())
-
     print('Hyper-parameters: \n', args.__dict__)
     print('Evaluation model pool: ', model_eval_pool)
 
@@ -181,6 +181,7 @@ def main(args):
 
         if args.space == "wp":
             # this method works in-line and back-props gradients to latents and f_latents
+            print(G)
             gan_backward(latents=latents, f_latents=f_latents, image_syn=image_syn, G=G, args=args)
 
         else:
