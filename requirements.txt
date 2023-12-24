@@ -8,7 +8,7 @@ ema-pytorch
 einops
 dill
 scipy
-timm=0.6.13
+timm==0.6.13
 ftfy
 regex
 Ninja
