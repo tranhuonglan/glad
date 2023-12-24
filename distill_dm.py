@@ -26,11 +26,10 @@ def main(args):
     torch.random.manual_seed(0)
     np.random.seed(0)
     random.seed(0)
-
+    wandb.login(key='cfeb192e9e37c78cab4d396f4465e0ea0a275561')
     run = wandb.init(
         project="GLaD",
         job_type="DM",
-        api_key='cfeb192e9e37c78cab4d396f4465e0ea0a275561',
         config=args
     )
 
