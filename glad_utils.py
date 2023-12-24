@@ -7,7 +7,7 @@ import os
 import torchvision
 import gc
 from tqdm import tqdm
-import torch.nn as nn
+
 from utils import get_network, config, evaluate_synset
 
 def build_dataset(ds, class_map, num_classes):
@@ -282,7 +282,7 @@ def load_sgxl(res, args=None):
             key = "G"
     with dnnlib.util.open_url(network_pkl) as f:
         G = legacy.load_network_pkl(f)[key]
-        # G = G.eval().requires_grad_(False).to(device)
+        G = G.eval().requires_grad_(False).to(device)
 
     z_dim = G.z_dim
     w_dim = G.w_dim
@@ -331,7 +331,6 @@ def latent_to_im(G, latents, args=None):
             if args.layer is None or args.layer == -1:
                 im = G(latents[0], mode="wp")
             else:
-                
                 im = G(latents[0], latents[1], args.layer, mode="from_f")
 
             if args.distributed and False:
@@ -437,5 +436,4 @@ def gan_backward(latents=None, f_latents=None, image_syn=None, G=None, args=None
     if args.layer != -1:
         f_latents.grad = torch.cat(f_latents_grad_list)
         del f_latents_grad_list
-
 

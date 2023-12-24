@@ -162,7 +162,7 @@ def get_dataset(dataset, data_path, batch_size=1, res=None, args=None):
         dst_train = datasets.ImageNet(data_path, split="train", transform=transform) # no augmentation
         dst_train_dict = {c : torch.utils.data.Subset(dst_train, np.squeeze(np.argwhere(np.equal(dst_train.targets, config.img_net_classes[c])))) for c in range(len(config.img_net_classes))}
         dst_train = torch.utils.data.Subset(dst_train, np.squeeze(np.argwhere(np.isin(dst_train.targets, config.img_net_classes))))
-        loader_train_dict = {c : torch.utils.data.DataLoader(dst_train_dict[c], batch_size=batch_size, shuffle=True, num_workers=16) for c in range(len(config.img_net_classes))}
+        loader_train_dict = {c : torch.utils.data.DataLoader(dst_train_dict[c], batch_size=batch_size, shuffle=True, num_workers=4) for c in range(len(config.img_net_classes))}
         dst_test = datasets.ImageNet(data_path, split="val", transform=transform)
         dst_test = torch.utils.data.Subset(dst_test, np.squeeze(np.argwhere(np.isin(dst_test.targets, config.img_net_classes))))
         for c in range(len(config.img_net_classes)):
